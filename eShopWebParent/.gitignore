@@ -48,3 +48,4 @@ coverage/
 .sass-cache/
 .idea/
 .tmp/
+/eShopBackEnd/src/main/resources/static/src/
