@@ -39,13 +39,6 @@ var KTModalNewTarget = function () {
                             }
                         }
                     },
-                    password: {
-                        validators: {
-                            notEmpty: {
-                                message: 'Password is required'
-                            }
-                        }
-                    },
                 },
                 plugins: {
                     trigger: new FormValidation.plugins.Trigger(),

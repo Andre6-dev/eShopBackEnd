@@ -5,6 +5,7 @@ import com.eshop.admin.user.repositories.UserRepository;
 import com.eshop.common.entity.Role;
 import com.eshop.common.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +19,11 @@ public class UserService {
     @Autowired
     private RoleRepository roleRepository;
 
+    // Bean annotation allow us to autowired and bring passwordEncoder to encode our password.
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+
     public List<User> listAll() {
         return (List<User>) userRepository.findAll();
     }
@@ -27,6 +33,14 @@ public class UserService {
     }
 
     public void save(User user) {
+        encodedPassword(user);
         userRepository.save(user);
     }
+
+    // Method which allow us to get and set the encryption in our password field in db.
+    private void encodedPassword(User user) {
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
+    }
+
 }
